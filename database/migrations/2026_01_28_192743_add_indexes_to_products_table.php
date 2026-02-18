@@ -1,0 +1,38 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+{
+    Schema::table('products', function (Blueprint $table) {
+        $table->index('external_id');
+        $table->index('category_external_id');
+    });
+
+    Schema::table('categories', function (Blueprint $table) {
+        $table->index('external_id');
+    });
+}
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('products', function (Blueprint $table) {
+            // Удаляем индексы при откате
+            $table->dropIndex(['external_id']);
+            $table->dropIndex(['category_external_id']);
+        });
+
+        Schema::table('categories', function (Blueprint $table) {
+            $table->dropIndex(['external_id']);
+        });
+    }
+};

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+@vite(['resources/css/checkout.css'])
+
+	<title>Оформлення замовлення</title>
+
+</head>
+<body>
+    <main>
+        <h1>Оформлення замовлення</h1>
+
+        <div class="checkout">
+
+    <!-- ЛЕВАЯ ЧАСТЬ -->
+            <div class="checkout-left">
+                <h3>Контактні дані</h3>
+
+                <input type="text" id="name" placeholder="Імʼя *">
+                <input type="text" id="lastname" placeholder="Прізвище *">
+                <input type="tel" id="phone" placeholder="Телефон *">
+                <input type="email" id="email" placeholder="Email">
+
+                <h3>Товари</h3>
+                <div id="checkout-items"></div>
+            </div>
+
+        <!-- ПРАВАЯ ЧАСТЬ -->
+            <div class="checkout-right">
+                <div class="summary">
+                    <div>Товарів на суму: <span id="sum-products">0 ₴</span></div>
+                    <div>Доставка: <span>0 ₴</span></div>
+                    <hr>
+                    <div class="total">
+                        Всього: <span id="sum-total">0 ₴</span>
+                    </div>
+
+                    <button id="submit-order">Оформити замовлення</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+@vite(['resources/js/checkout.js'])
+
+</body>
+</html>
