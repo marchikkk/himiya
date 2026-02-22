@@ -145,5 +145,5 @@ himiya
 @endsection
 
 @push('scripts')
-@vite('resources/js/botCatalog.js', 'resources/js/categoty.js')
+@vite(['resources/js/botCatalog.js', 'resources/js/category.js'])
 @endpush

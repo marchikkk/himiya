@@ -32,12 +32,12 @@
 		<div class="header-bot flex no-wrap justify-center items-center">
 			<div class="header-bot-content page-conteiner flex items-center">
 				<div class="logo">
-					<a href="/"><img src="{{ Vite::asset('img/logo.svg')}}" alt="Логотип himiya"> </a>
+					<a href="/"><img src="{{ Vite::asset('resources/img/logo.svg')}}" alt="Логотип himiya"> </a>
 				</div>
 
 				<div class="catalog-wrapper flex js-catalog-trigger" id="catalog-wrapper">
 					<button class="catalog-btn justify-center flex items-center ">
-						<img src="{{ Vite::asset('img/threebars.svg')}}" alt="">
+						<img src="{{ Vite::asset('resources/img/threebars.svg')}}" alt="">
 						<!-- <span class="menu-icon">☰</span> -->
 						<span>Каталог</span>
 					</button>
@@ -47,7 +47,7 @@
 					<div class="search flex justify-center items-center">
 						<input type="text" id="searchInput" placeholder="Пошук товарів">
 						<button class="mic-btn" id="micBtn">
-							<img src="{{ Vite::asset('img/micro.svg')}}" alt="Голосовий пошук">
+							<img src="{{ Vite::asset('resources/img/micro.svg')}}" alt="Голосовий пошук">
 						</button>
 					</div>	
 					<button class="search-btn flex items-center justify-center no-wrap ">
@@ -59,13 +59,13 @@
 				<div class="panel flex items-center">
 					<div class="enter">
 						<a href="#">
-							<img src="{{ Vite::asset('img/enter.svg')}}" alt="">	
+							<img src="{{ Vite::asset('resources/img/enter.svg')}}" alt="">	
 							<span>Увійти</span>
 						</a> 
 					</div>
 					<div class="selected column">
 						<a href="/favorites">
-							<img src="{{ Vite::asset('img/selected.svg')}}" alt="">	
+							<img src="{{ Vite::asset('resources/img/selected.svg')}}" alt="">	
 							<span>Обране</span>
 							<span id="wishlist-count">0</span>
 						</a>
@@ -73,7 +73,7 @@
 				</div>
 				<div class="tray flex items-center no-wrap ">
 					<a href="" class="cart flex items-center justify-center">
-						<img src="{{ Vite::asset('img/tray.svg')}}" alt="Кошик">
+						<img src="{{ Vite::asset('resources/img/tray.svg')}}" alt="Кошик">
 						<span>Кошик</span>
 						<span class="cart-count" id="cart-count">0</span>
 					</a>
@@ -106,7 +106,7 @@
 
 <div class="mobile-catalog-trigger-container page-conteiner">
     <button class="mobile-catalog-btn js-mobile-catalog-trigger">
-        <img src="{{ Vite::asset('img/threebars.svg')}}" alt="">
+        <img src="{{ Vite::asset('resources/img/threebars.svg')}}" alt="">
         <span>Каталог </span>
     </button>
 </div>
@@ -128,19 +128,19 @@
 
 	<nav class="mobile-nav">
 	  <a href="/" class="nav-item">
-		<img src="{{ Vite::asset('img/home.svg')}}" alt="">
+		<img src="{{ Vite::asset('resources/img/home.svg')}}" alt="">
 		<span>Головна</span>
 	  </a>
 	
 	  <div class="nav-item js-catalog-trigger">
-		<img src="{{ Vite::asset('img/catalog-m.svg')}}" alt="">
+		<img src="{{ Vite::asset('resources/img/catalog-m.svg')}}" alt="">
 		<span>Каталог</span>
 	  </div>
 	
 		<div class="nav-item">
 		  <a href="" class="cart">
 			<div class="icon-badge-wrapper">
-				<img src="{{ Vite::asset('img/tray.svg')}}" alt="">
+				<img src="{{ Vite::asset('resources/img/tray.svg')}}" alt="">
 				<span class="badge" id="cart-count-mobile">0</span>
 				
 			</div>
@@ -150,14 +150,14 @@
 	  
 	  <a href="/favorites" class="nav-item">
 		<div class="icon-badge-wrapper">
-		  <img src="{{ Vite::asset('img/selected.svg')}}" alt="">
+		  <img src="{{ Vite::asset('resources/img/selected.svg')}}" alt="">
 		  <span class="badge wishlist-count-mobile" id="wishlist-count-mobile">0</span>
 		</div>
 		<span>Обране</span>
 	  </a>
 	
 	  <a href="profile.html" class="nav-item">
-		<img src="{{ Vite::asset('img/enter.svg')}}" alt="">
+		<img src="{{ Vite::asset('resources/img/enter.svg')}}" alt="">
 		<span>Кабінет</span>
 	  </a>
 	</nav>

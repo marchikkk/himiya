@@ -26,7 +26,7 @@
 				<span class="current-price"></span>
 			</div>
 			<a href="#" class="btn btn-primary card-btn" data-id="">
-				Додати <img src="{{ Vite::asset('img/trayy.png')}}" alt="Кошик">
+				Додати <img src="{{ Vite::asset('resources/img/trayy.png')}}" alt="Кошик">
 			</a>
 		</div>
 		</div>
