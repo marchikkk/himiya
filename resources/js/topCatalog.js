@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // ======================
   // 1️⃣ Загружаем категории
   // ======================
-  const res = await fetch('http://phpsite.test/api/categories');
+  const res = await fetch('/api/categories');
   const json = await res.json();
   const categories = json.data;
 

@@ -112,7 +112,7 @@ export function renderProducts(products, containerId) {
 
 // ===== ЗАГРУЗКА =====
 document.addEventListener('DOMContentLoaded', () => {
-  fetch('http://phpsite.test/api/products')
+  fetch('/api/products')
     .then(res => res.json())
     .then(response => {
       const data = response.data;

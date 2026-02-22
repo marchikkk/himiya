@@ -34,12 +34,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   try {
     // =====  грузим категории =====
-    const catRes = await fetch('http://phpsite.test/api/categories');
+    const catRes = await fetch('/api/categories');
     const catJson = await catRes.json();
     const categories = catJson.data;
 
     // =====  грузим товары =====
-    const prodRes = await fetch('http://phpsite.test/api/products');
+    const prodRes = await fetch('/api/products');
     const prodJson = await prodRes.json();
 
     const products = prodJson.data.map(p => ({

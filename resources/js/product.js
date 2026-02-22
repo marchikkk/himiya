@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   try {
-    const res = await fetch(`http://phpsite.test/api/products/${id}`);
+    const res = await fetch(`/api/products/${id}`);
 
     if (!res.ok) {
       throw new Error('Product not found');

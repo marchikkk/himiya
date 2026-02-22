@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('http://phpsite.test/api/categories')
+    fetch('/api/categories')
         .then(res => res.json())
         .then(response => {
             const categories = response.data;
