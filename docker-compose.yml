@@ -32,9 +32,9 @@ services:
     container_name: postgres_db
     restart: always
     environment:
-      POSTGRES_DB: phpsite
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: qwerty24 
+      POSTGRES_DB: '${DB_DATABASE}'
+      POSTGRES_USER: '${DB_USERNAME}'
+      POSTGRES_PASSWORD: '${DB_PASSWORD}' 
     ports:
       - 5432:5432
     volumes:
