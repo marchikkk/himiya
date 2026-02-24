@@ -20,42 +20,36 @@ class ProductResource extends JsonResource
 
             'stock_total' => (int) $this->stock_total,
 
-            'images' => $this->whenLoaded(
-                'images',
-                fn () => $this->images->pluck('url')->values()
-            ),
+            'images' => $this->images
+                ? $this->images->pluck('url')->values()
+                : [],
 
-            'category' => $this->whenLoaded('category', function () {
-                return [
+            'category' => $this->category ? [
                     'id' => $this->category->external_id,
                     'name' => $this->category->name,
-                ];
-            }),
+                ] : null,
 
-            'stocks' => $this->whenLoaded('stocks', function () use ($request) {
-                $stocks = $this->stocks;
+            'stocks' => $this->stocks
+                ? $this->stocks->map(function ($stock) use ($request) {
 
-                if ($warehouseId = $request->get('warehouse')) {
-                    $stocks = $stocks->filter(
-                        fn ($stock) => $stock->warehouse->external_id === $warehouseId
-                    );
-                }
+                    if ($warehouseId = $request->get('warehouse')) {
+                        if ($stock->warehouse?->external_id !== $warehouseId) {
+                            return null;
+                        }
+                    }
 
-                return $stocks->map(function ($stock) {
                     return [
                         'warehouse_id' => $stock->warehouse?->external_id,
                         'warehouse_name' => $stock->warehouse?->name,
                         'quantity' => (int) $stock->quantity,
                     ];
-                })->values();
-            }),
+                })->filter()->values()
+                : [],
 
-            'brand' => $this->whenLoaded('brand', function () {
-                return [
+            'brand' => $this->brand ? [
                     'id' => $this->brand->id,
                     'name' => $this->brand->name,
-                ];
-            }),
+                ] : null,
         ];
     }
 }

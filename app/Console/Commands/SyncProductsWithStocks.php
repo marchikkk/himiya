@@ -132,7 +132,7 @@ class SyncProductsWithStocks extends Command
 
                     foreach ($item['stocks'] as $stock) {
 
-                        $warehouse = Warehouse::updateOrCreate(
+                        $warehouse = Warehouse::firstOrCreate(
                             ['external_id' => $stock['id']],
                             ['name' => $stock['name']]
                         );

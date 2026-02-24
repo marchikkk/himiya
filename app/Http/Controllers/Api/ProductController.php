@@ -118,8 +118,6 @@ class ProductController extends Controller
                 'total' => $products->total(),
             ]
         ]);
-
-        
     }
 
     public function show(string $id)

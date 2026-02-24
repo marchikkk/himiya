@@ -8,8 +8,7 @@ class ProductStock extends Model
 {
     protected $fillable = [
         'product_id',
-        'warehouse_external_id',
-        'warehouse_name',
+        'warehouse_id',
         'quantity',
     ];
 
