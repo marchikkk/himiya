@@ -66,16 +66,16 @@
 					<div class="selected column">
 						<a href="/favorites">
 							<img src="{{ Vite::asset('resources/img/selected.svg')}}" alt="">	
+							<span class="badge-desktop" id="wishlist-count">0</span>
 							<span>Обране</span>
-							<span id="wishlist-count">0</span>
 						</a>
 					</div>
 				</div>
 				<div class="tray flex items-center no-wrap ">
 					<a href="" class="cart flex items-center justify-center">
 						<img src="{{ Vite::asset('resources/img/tray.svg')}}" alt="Кошик">
+						<span class="badge-desktop-tray cart-count" id="cart-count"></span>
 						<span>Кошик</span>
-						<span class="cart-count" id="cart-count">0</span>
 					</a>
 				</div>
 			</div>
@@ -137,21 +137,18 @@
 		<span>Каталог</span>
 	  </div>
 	
-		<div class="nav-item">
-		  <a href="" class="cart">
+		<a href="" class="cart nav-item">	
 			<div class="icon-badge-wrapper">
 				<img src="{{ Vite::asset('resources/img/tray.svg')}}" alt="">
-				<span class="badge" id="cart-count-mobile">0</span>
-				
+				<span class="badge" id="cart-count-mobile"></span>
 			</div>
 			<span class="nav-label">Кошик</span>
-		  </a>
-		</div>
-	  
+		</a>
+		
 	  <a href="/favorites" class="nav-item">
 		<div class="icon-badge-wrapper">
 		  <img src="{{ Vite::asset('resources/img/selected.svg')}}" alt="">
-		  <span class="badge wishlist-count-mobile" id="wishlist-count-mobile">0</span>
+		  <span class="badge wishlist-count-mobile" id="wishlist-count-mobile"></span>
 		</div>
 		<span>Обране</span>
 	  </a>

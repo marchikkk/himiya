@@ -78,8 +78,8 @@ function renderWishlistItems() {
     clone.querySelector('.product-article').textContent = `Артикул: ${p.article || p.id}`;
     clone.querySelector('.product-brand').textContent = p.brand || '';
     clone.querySelector('.product-name').textContent = p.name;
-    clone.querySelector('.product-name').href = `product.html?slug=${p.slug}`;
-    clone.querySelector('.product-link').href = `product.html?slug=${p.slug}`;
+    clone.querySelector('.product-name').href = `product?slug=${p.slug}`;
+    clone.querySelector('.product-link').href = `product?slug=${p.slug}`;
     clone.querySelector('.product-image').src = p.image;
 
     // Цены

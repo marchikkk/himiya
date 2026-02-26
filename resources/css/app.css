@@ -325,10 +325,31 @@ h5 {
 
 
 .column {
+  position: relative;
+  display: flex;
 	flex-direction: column;
 }
 
+.badge-desktop {
+    position: absolute;
+    top: -5px;
+    right: 20px;
+    background: #C80003;
+    color: white;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 16px;
+    height: 16px;
+    border-radius: 10px;
+    padding: 0 4px;   
+    box-sizing: border-box;
+  }
+
 .tray {
+  position: relative;
+  display: flex;
   margin-left: 0;
   border-radius: 10px;
   transition: filter 0.3s ease;
@@ -360,6 +381,23 @@ h5 {
   width: 1.6rem;
   height: 1.6rem;
 }
+
+.badge-desktop-tray {
+    position: absolute;
+    top: -5px;
+    right: 130px;
+    background: #C80003;
+    color: white;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 16px;
+    height: 16px;
+    border-radius: 10px; 
+    padding: 0 4px;     
+    box-sizing: border-box;
+  }
 
 .marg {
   margin: 0;
@@ -774,7 +812,7 @@ h5 {
   max-width: 100%;
   max-height: 100%;
   width: auto;
-  height: auto;
+  height: 250px;
   object-fit: contain;
 }
 
@@ -1102,13 +1140,14 @@ body.menu-open .mobile-catalog-trigger-container {
     background: #C80003;
     color: white;
     font-size: 10px;
-    min-width: 16px;
-    height: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    padding: 0 4px;
+    min-width: 16px;
+    height: 16px;
+    border-radius: 10px; /* Вместо 50% для корректной формы пилюли */
+    padding: 0 4px;      /* Теперь пэддинг уместен */
+    box-sizing: border-box;
   }
 
   /* Добавляем отступ контенту снизу, чтобы меню его не перекрывало */
