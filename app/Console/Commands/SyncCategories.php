@@ -17,7 +17,7 @@ class SyncCategories extends Command
         $this->info('Starting category sync...');
 
         // Делаем запрос (пока адрес прямо тут, чтобы не зависеть от кеша .env)
-        $response = Http::withBasicAuth('Artem', '1111')
+        $response = Http::withBasicAuth('', '')
             ->get(env('ONEC_API_CATEGORIES'));
 
         if (!$response->ok()) {

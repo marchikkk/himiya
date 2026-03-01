@@ -29,3 +29,11 @@ Route::get('/product', function () {
 Route::get('/search', function () {
     return view('static/search');
 });
+
+Route::get('/media/{filename}', function ($filename) {
+    $path = storage_path('app/public/products/' . $filename);
+    if (!file_exists($path)) {
+        abort(404);
+    }
+    return response()->file($path);
+});

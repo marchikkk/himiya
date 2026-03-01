@@ -20,9 +20,9 @@ class ProductResource extends JsonResource
 
             'stock_total' => (int) $this->stock_total,
 
-            'images' => $this->images
-                ? $this->images->pluck('url')->values()
-                : [],
+            'images' => $this->images->map(function ($img) {
+                return url('/media/' . basename($img->path));
+            })->values(),
 
             'category' => $this->category ? [
                     'id' => $this->category->external_id,

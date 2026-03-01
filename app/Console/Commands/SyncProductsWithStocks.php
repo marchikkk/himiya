@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
@@ -20,7 +22,7 @@ class SyncProductsWithStocks extends Command
         $this->info('Starting category sync first...');
         $this->call('sync:categories');
 
-        $response = Http::withBasicAuth('Artem', '1111')
+        $response = Http::withBasicAuth('', '')
             ->get(env('ONEC_API_PRODUCTS'));
 
         if (!$response->ok()) {
@@ -77,49 +79,61 @@ class SyncProductsWithStocks extends Command
 
                 /*
                 |--------------------------------------------------------------------------
-                | IMAGES (ПРАВИЛЬНЫЙ SYNC)
+                | IMAGES (СКАЧИВАЕМ И СОХРАНЯЕМ В STORAGE)
                 |--------------------------------------------------------------------------
                 */
-                $newImages = [];
+                $syncedPaths = [];
 
+                $imagesFrom1C = [];
                 if (!empty($item['images']) && is_array($item['images'])) {
-
-                    foreach ($item['images'] as $index => $url) {
-
-                        $product->images()->updateOrCreate(
-                            [
-                                'product_id' => $product->id,
-                                'url' => $url
-                            ],
-                            [
-                                'sort' => $index
-                            ]
-                        );
-
-                        $newImages[] = $url;
-                    }
-
+                    $imagesFrom1C = $item['images'];
                 } elseif (!empty($item['image'])) {
-
-                    $product->images()->updateOrCreate(
-                        [
-                            'product_id' => $product->id,
-                            'url' => $item['image']
-                        ],
-                        [
-                            'sort' => 0
-                        ]
-                    );
-
-                    $newImages[] = $item['image'];
+                    $imagesFrom1C = [$item['image']];
                 }
 
-                // Удаляем только те картинки которых больше нет в 1С
-                if (!empty($newImages)) {
-                    $product->images()
-                        ->whereNotIn('url', $newImages)
-                        ->delete();
+                foreach ($imagesFrom1C as $index => $url) {
+                    // 1. Определяем "родное" имя файла из ссылки (например, fc986626-....jpg)
+                    $filename = basename($url); 
+                    $path = "products/$filename";
+
+                    // 2. Ищем запись в базе по path (вместо url)
+                    $image = $product->images()->where('path', $path)->first();
+
+                    // 3. Проверяем, существует ли физически файл
+                    if ($image && Storage::disk('public')->exists($path)) {
+                        // Если всё на месте, просто обновляем сортировку
+                        $image->update(['sort' => $index]);
+                    } else {
+                        try {
+                            // Если файла нет — качаем
+                            $response = Http::timeout(10)->get($url);
+
+                            if ($response->ok()) {
+                                Storage::disk('public')->put($path, $response->body());
+
+                                // Обновляем существующую запись или создаем новую
+                                $product->images()->updateOrCreate(
+                                    ['path' => $path],
+                                    ['sort' => $index]
+                                );
+                            }
+                        } catch (\Exception $e) {
+                            logger("Image download failed: " . $url . " Error: " . $e->getMessage());
+                        }
+                    }
+                    $syncedPaths[] = $path;
                 }
+
+                // 4. Удаляем из базы и с диска всё, чего не было в этом сеансе синхронизации
+                $product->images()
+                    ->whereNotIn('path', $syncedPaths)
+                    ->get()
+                    ->each(function ($image) {
+                        if ($image->path) {
+                            Storage::disk('public')->delete($image->path);
+                        }
+                        $image->delete();
+                    });
                 /*
                 |--------------------------------------------------------------------------
                 | STOCKS
